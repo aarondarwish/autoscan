@@ -1,5 +1,10 @@
 device_string = "escl:https://192.168.0.26:443" # Find out your device info using "scanimage -L" command
 
+
+class bcolors:
+    WARNING = '\033[31m'
+    ENDC = '\033[0m'
+
 import os 
 index = input("\nEnter the initial index number:\t")
 flipped = 1
@@ -12,13 +17,13 @@ while True:
     flipped *= -1
 
     if flipped == 1:
-        scan_message = "\n(Flipped) - Scan again? [y/n], or 's' for skip to scanning without flipping.\t"
+        scan_message = "\n(" + bcolors.WARNING + "Flipped" + bcolors.ENDC + ") - Scan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
     else:
-        scan_message = "\nScan again? [y/n], or 's' for skip to scanning without flipping.\t"
+        scan_message = "\nScan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
 
     again = input(scan_message)
 
-    if again == 'y':
+    if again == '':
         continue
     elif again =='s':
         flipped *= -1
