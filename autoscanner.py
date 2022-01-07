@@ -12,16 +12,16 @@ while True:
     flipped *= -1
 
     if flipped == 1:
-        scan_message = "\n(Flipped) - Scan again? [y/n], or 's' for skip.\t"
+        scan_message = "\n(Flipped) - Scan again? [y/n], or 's' for skip to scanning without flipping.\t"
     else:
-        scan_message = "\nScan again? [y/n], or 's' for skip.\t"
+        scan_message = "\nScan again? [y/n], or 's' for skip to scanning without flipping.\t"
 
     again = input(scan_message)
 
     if again == 'y':
         continue
     elif again =='s':
-        flipped *= 1
+        flipped *= -1
         continue
     else:
         break;
