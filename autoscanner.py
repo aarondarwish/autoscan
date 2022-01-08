@@ -17,7 +17,7 @@ while True:
     flipped *= -1
 
     if flipped == 1:
-        scan_message = "\n(" + bcolors.WARNING + "Flipped" + bcolors.ENDC + ") - Scan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
+        scan_message = "\n[" + bcolors.WARNING + "Flipped" + bcolors.ENDC + "] - Scan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
     else:
         scan_message = "\nScan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
 
