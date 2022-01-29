@@ -1,5 +1,4 @@
-device_string = "escl:https://192.168.0.26:443" # Find out your device info using "scanimage -L" command
-
+device_string = "escl:https://192.168.0.21:443" # Find out your device info using "scanimage -L" command
 
 class bcolors:
     WARNING = '\033[31m'
@@ -7,10 +6,11 @@ class bcolors:
 
 import os 
 index = input("\nEnter the initial index number:\t")
+resolution = input("\n Enter resolution in DPI in the range of 1-1400:\t")
 flipped = 1
 
 while True:
-    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=300 -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
+    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + resolution + " -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
     os.system(command)
     index = int(index)
     index += 1
