@@ -6,11 +6,13 @@ class bcolors:
 
 import os 
 index = input("\nEnter the initial index number:\t")
-resolution = input("\n Enter resolution in DPI in the range of 1-1400:\t")
 flipped = 1
+resolution = input("\n Enter resolution in DPI in the range of 1-1400 (the default set-point is 300 DPI):\t")
+if resolution == '':
+    resolution= 300
 
 while True:
-    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + resolution + " -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
+    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + str(resolution) + " -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
     os.system(command)
     index = int(index)
     index += 1
