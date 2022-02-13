@@ -13,11 +13,14 @@ class bcolors:
 # Check if the required packages exists. If not, exit the program.
 check_scanimage = "/" in str(subprocess.check_output(["whereis", "scanimage"]))
 check_jpegoptim = "/" in str(subprocess.check_output(["whereis", "jpegoptim"]))
+check_imagemagick = "/" in str(subprocess.check_output(["whereis", "convert"]))
 
 if (check_scanimage == False):
     sys.exit("Please install SANE to acquire the scanimage package.")
 if (check_jpegoptim == False):
     sys.exit("Please install jpegoptim.")
+if (check_imagemagick == False):
+    sys.exit("Please install imagemagick.")
 
 # Ask for the resolution and starting number to be used in naming the image files.
 index = input("\nEnter the initial index number:\t")
