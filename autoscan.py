@@ -16,11 +16,11 @@ check_jpegoptim = "/" in str(subprocess.check_output(["whereis", "jpegoptim"]))
 check_imagemagick = "/" in str(subprocess.check_output(["whereis", "convert"]))
 
 if (check_scanimage == False):
-    sys.exit("Please install SANE to acquire the scanimage package.")
+    sys.exit("\nPlease install SANE to acquire the scanimage package.\n")
 if (check_jpegoptim == False):
-    sys.exit("Please install jpegoptim.")
+    sys.exit("\nPlease install jpegoptim.\n")
 if (check_imagemagick == False):
-    sys.exit("Please install imagemagick.")
+    sys.exit("\nPlease install imagemagick.\n")
 
 # Ask for the resolution and starting number to be used in naming the image files.
 index = input("\nEnter the initial index number:\t")
@@ -31,14 +31,16 @@ if resolution == '':
 
 # Perform the scanning according to the user's set-points.
 while True:
-    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + resolution + " -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
+    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + resolution + " \
+            -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
     os.system(command)
     index = int(index)
     index += 1
     flipped *= -1
 
     if flipped == 1:
-        scan_message = "\n[" + bcolors.WARNING + "Flipped" + bcolors.ENDC + "] - Scan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
+        scan_message = "\n[" + bcolors.WARNING + "Flipped" + bcolors.ENDC + "] - Scan again? Press 'ENTER' \
+                to continue, or 's' for skip to scanning without flipping.\t"
     else:
         scan_message = "\nScan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
 
