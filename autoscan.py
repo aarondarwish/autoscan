@@ -7,6 +7,7 @@ device_string = "escl:https://192.168.0.20:443" # Find out your device info usin
 
 
 import subprocess, os, sys
+
 # Set colours for warning.
 class bcolors:
     WARNING = '\033[31m'
@@ -28,6 +29,7 @@ if (check_imagemagick == False):
 index = input("\nEnter the initial index number:\t")
 flipped = 1
 resolution = str(input("\n Enter resolution in DPI in the range of 1-1400 (the default set-point is 300 DPI):\t"))
+
 if resolution == '':
     resolution = "300"
 
