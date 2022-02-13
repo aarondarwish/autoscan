@@ -32,3 +32,5 @@ while True:
         continue
     else:
         break;
+
+os.system("jpegoptim ./*.jpeg && convert ./*.jpeg scan.pdf")
