@@ -1,18 +1,34 @@
-device_string = "escl:https://192.168.0.21:443" # Find out your device info using "scanimage -L" command
-
+# Set below your device endpoint.
+# ------------------------------------------------------------------------------------------------------
+device_string = "escl:https://192.168.0.20:443" # Find out your device info using "scanimage -L" command
+# ------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------
+import subprocess, os, sys
+# Set colours for warning.
 class bcolors:
     WARNING = '\033[31m'
     ENDC = '\033[0m'
 
-import os 
+# Check if the required packages exists. If not, exit the program.
+check_scanimage = "/" in str(subprocess.check_output(["whereis", "scanimage"]))
+check_jpegoptim = "/" in str(subprocess.check_output(["whereis", "jpegoptim"]))
+
+if (check_scanimage == False):
+    sys.exit("Please install SANE to acquire the scanimage package.")
+if (check_jpegoptim == False):
+    sys.exit("Please install jpegoptim.")
+
+# Ask for the resolution and starting number to be used in naming the image files.
 index = input("\nEnter the initial index number:\t")
 flipped = 1
-resolution = input("\n Enter resolution in DPI in the range of 1-1400 (the default set-point is 300 DPI):\t")
+resolution = str(input("\n Enter resolution in DPI in the range of 1-1400 (the default set-point is 300 DPI):\t"))
 if resolution == '':
-    resolution= 300
+    resolution = "300"
 
+# Perform the scanning according to the user's set-points.
 while True:
-    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + str(resolution) + " -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
+    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + resolution + " -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
     os.system(command)
     index = int(index)
     index += 1
@@ -33,4 +49,5 @@ while True:
     else:
         break;
 
+# Optimize and convert the images into a pdf.
 os.system("jpegoptim ./*.jpeg && convert ./*.jpeg scan.pdf")
