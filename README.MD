@@ -8,6 +8,6 @@ You need the `imagemagick` and `jpegoptim` packages installed, as well as the `S
 
 ## Use
 Simply run the `autoscan.py` script using a python interpreter:
-```bash
+```console
 python autoscan.py
 ```
