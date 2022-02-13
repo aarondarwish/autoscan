@@ -9,9 +9,9 @@ device_string = "escl:https://192.168.0.20:443" # Find out your device info usin
 import subprocess, os, sys
 
 # Set colours for warning.
-class bcolors:
-    WARNING = '\033[31m'
-    ENDC = '\033[0m'
+class colour:
+    warning = '\033[31m'
+    end = '\033[0m'
 
 # Check if the required packages exists. If not, exit the program.
 check_scanimage = "/" in str(subprocess.check_output(["whereis", "scanimage"]))
@@ -19,11 +19,11 @@ check_jpegoptim = "/" in str(subprocess.check_output(["whereis", "jpegoptim"]))
 check_imagemagick = "/" in str(subprocess.check_output(["whereis", "convert"]))
 
 if (check_scanimage == False):
-    sys.exit("\nPlease install SANE to acquire the scanimage package.\n")
+    sys.exit("\nPlease install SANE to acquire the " + colour.warning + "scanimage" + colour.end + " package.\n")
 if (check_jpegoptim == False):
-    sys.exit("\nPlease install jpegoptim.\n")
+    sys.exit("\nPlease install " + colour.warning + "jpegoptim" + colour.end + ".\n")
 if (check_imagemagick == False):
-    sys.exit("\nPlease install imagemagick.\n")
+    sys.exit("\nPlease install " + colour.warning + "imagemagick" + colour.end + ".\n")
 
 # Ask for the resolution and starting number to be used in naming the image files.
 index = input("\nEnter the initial index number:\t")
@@ -43,7 +43,7 @@ while True:
     flipped *= -1
 
     if flipped == 1:
-        scan_message = "\n[" + bcolors.WARNING + "Flipped" + bcolors.ENDC + "] - Scan again? Press 'ENTER' \
+        scan_message = "\n[" + colour.warning + "Flipped" + colour.end + "] - Scan again? Press 'ENTER' \
                 to continue, or 's' for skip to scanning without flipping.\t"
     else:
         scan_message = "\nScan again? Press 'ENTER' to continue, or 's' for skip to scanning without flipping.\t"
