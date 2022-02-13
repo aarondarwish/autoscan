@@ -5,3 +5,9 @@ After the scanning is finished, optimize the images then convert them into a `pd
 
 ## Requirements
 You need the `imagemagick` and `jpegoptim` packages installed, as well as the `SANE` (Scanner Access Now Easy) library suit.
+
+## Use
+Simply run the `autoscan.py` script using a python interpreter:
+```bash
+python autoscan.py
+```
