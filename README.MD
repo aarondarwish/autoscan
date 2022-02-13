@@ -7,7 +7,9 @@ After the scanning is finished, optimize the images then convert them into a `pd
 You need the `imagemagick` and `jpegoptim` packages installed, as well as the `SANE` (Scanner Access Now Easy) library suit.
 
 ## Use
-Simply run the `autoscan.py` script using a python interpreter:
+Firstly find your scanner by issuing `scanimage -L` and then copy the endpoint and assign it to the `device_string` variable inside the `autoscan.py` file.
+
+Then simply run the `autoscan.py` script using a python interpreter:
 ```console
 python autoscan.py
 ```
