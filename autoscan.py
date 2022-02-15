@@ -26,7 +26,6 @@ if (check_jpegoptim == False):
 if (check_imagemagick == False):
     sys.exit("\nPlease install " + colour.warning + "imagemagick" + colour.end + ".\n")
 
-
 # Ask for the starting number to be used in naming the image files.
 while True:
     index = input("\nEnter the initial page number:\t")
@@ -55,7 +54,6 @@ while True:
             print(colour.warning + "Please enter a number that is within the range." + colour.end)
     except ValueError:
         input(colour.warning + "You did not enter a number.\n" + colour.end)
-
 
 # Set a valid scanner's colour mode flag.
 while True:
