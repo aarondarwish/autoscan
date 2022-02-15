@@ -59,6 +59,7 @@ while True:
 while True:
     colour_mode = input("\nWould you like the scanned image to be:\n\t Coloured [1]\t\t Black & white [2]?\n")
 
+    # Test for valid colour mode inputs.
     try:
         colour_mode = int(colour_mode)
         if colour_mode == 1:
@@ -73,9 +74,8 @@ while True:
 # By default, the page isn't flipped.
 flipped = False
 
-# Perform the scanning according to the user's set-points.
+# Attempt the scanning according to the user's set-points.
 while True:
-
     # Perform the scan.
     command = "scanimage --device " + device_string + " --format=jpeg --mode=color --resolution=" + resolution + " \
             -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
