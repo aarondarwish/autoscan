@@ -35,7 +35,7 @@ if resolution == '':
 
 # Perform the scanning according to the user's set-points.
 while True:
-    command = "scanimage --device " + device_string + " --format=jpeg --mode=grey --resolution=" + resolution + " \
+    command = "scanimage --device " + device_string + " --format=jpeg --mode=color --resolution=" + resolution + " \
             -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
     os.system(command)
     index = int(index)
