@@ -123,7 +123,7 @@ while True:
     again = input(scan_message)
     if again == '':
         # If the page has been flipped previously, remove the flip tag. Otherwise, then enable it.
-        flipped *= False 
+        flipped = not flipped
         continue
     elif again =='s':
         flipped = False 
