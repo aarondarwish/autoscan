@@ -8,9 +8,33 @@ device_string = "escl:https://192.168.0.20:443" # Find out your device info usin
 
 import subprocess, os, sys
 
+# Fetch one character from the standard input stream.
+def _find_getch():
+    try:
+        import termios
+    except ImportError:
+        # Non-POSIX. Return msvcrt's (Windows') getch.
+        import msvcrt
+        return msvcrt.getch
+
+    # On POSIX/UNIX systems, return a getch that manipulates the tty.
+    import tty
+    def _getch():
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(fd)
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+    return _getch
+getch = _find_getch()
+
 # Set colours for warning.
 class colour:
     warning = '\033[31m'
+    note = '\033[34m'
     end = '\033[0m'
 
 # Check if the required packages exists.
@@ -37,7 +61,9 @@ while True:
 
 # Ensure that index is a number and in the range of 1-1400.
 while True:
-    resolution = input("\nEnter resolution in DPI in the range of 1-1400 (Just press ENTER for the default set-point, which is 300 DPI):\t")
+    resolution = input("\nEnter resolution in DPI in the range of 1-1400 (Just press ENTER for the default set-point, which is 300 DPI).\
+            \n"+ colour.note + "⚠ Please note that the higher the DPI set-point, the slower the scanning will be. ⚠" + colour.end + \
+            "\nDPI value:\t")
 
     # Set the default resolution in case no value is provided.
     if resolution == '':
@@ -51,14 +77,14 @@ while True:
             resolution = str(resolution) # The command flag must be a string.
             break
         else:
-            print(colour.warning + "Please enter a number that is within the range." + colour.end)
+            print(colour.warning + "\n⚠ Please enter a number that is within the range. ⚠" + colour.end)
     except ValueError:
-        input(colour.warning + "You did not enter a number.\n" + colour.end)
+        print(colour.warning + "⚠ You did not enter a number. ⚠\n" + colour.end)
 
 # Set a valid scanner's colour mode flag.
 while True:
-    colour_mode = input("\nWould you like the scanned image to be:\n\t Coloured [1]\t\t Black & white [2]?\n")
-
+    print("\nWould you like the scanned image to be:\n\t Coloured [1]\t\t Black & white [2]?\n")
+    colour_mode = getch()
     # Test for valid colour mode inputs.
     try:
         colour_mode = int(colour_mode)
@@ -69,7 +95,7 @@ while True:
             colour_mode = "grey"
             break
     except ValueError:
-        colour_mode == input(colour.warning + "\nCannot recognise your colour mode option selection. Please only enter 1 or 2.\n" + colour.end)
+        print(colour.warning + "\n⚠ Cannot recognise your colour mode option selection. ⚠\n" + color.end)
 
 # By default, the page isn't flipped.
 flipped = False
@@ -77,6 +103,7 @@ flipped = False
 # Attempt the scanning according to the user's set-points.
 while True:
     # Perform the scan.
+    print(colour.warning + "\nAttempting the scan...\n" + colour.end)
     command = "scanimage --device " + device_string + " --format=jpeg --mode=color --resolution=" + resolution + " \
             -x 210 -y 297 --progress --output-file=page_" + str(index) + ".jpeg"
     os.system(command)
