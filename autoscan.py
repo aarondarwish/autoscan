@@ -95,7 +95,7 @@ while True:
             colour_mode = "grey"
             break
     except ValueError:
-        print(colour.warning + "\n⚠ Cannot recognise your colour mode option selection. ⚠\n" + color.end)
+        print(colour.warning + "\n⚠ Cannot recognise your colour mode option selection. ⚠\n" + colour.end)
 
 # By default, the page isn't flipped.
 flipped = False
